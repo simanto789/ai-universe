@@ -12,15 +12,21 @@ const displayAiHub = aiHub => {
         aiDiv.classList.add('col');
         aiDiv.innerHTML = `
            <div class="card">
-              <img src="${ai.image}" class="card-img-top" alt="...">
+              <img src="${ai.image}" class="card-img-top img-fluid rounded" alt="...">
                 <div class="card-body">
                     <h5 class="card-feature">Features</h5>
-                    
-                    <p class="card-text">This is a longer card with supporting text below as a naturallead-in to additional content. This content is a little bit longer.</p>
+                     <ol mb-2> 
+                       ${ai.features.map(feature => `<li>${feature}</li>`).join('')}
+                     </ol>
+                     <h5 class="card-tittle border-top mt-2">${ai.name}</h5>
+                    <div class="d-flex justify-content-between mt-3"> 
+                        <p>${ai.published_in}</p>
+                        <a class="btn btn-primary" href="#" role="button">Details</a> 
+                    </div> 
                 </div>
             </div>
     `;
-    aiContainer.appendChild(aiDiv);
+        aiContainer.appendChild(aiDiv);
     })
 }
 
