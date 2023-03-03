@@ -27,7 +27,7 @@ const displayAiHub = aiHub => {
                      <h5 class="card-tittle border-top mt-2">${ai.name}</h5>
                     <div class="d-flex justify-content-between mt-3"> 
                         <p>${ai.published_in}</p>
-                        <a class="btn btn-primary" href="#" role="button">Details</a> 
+                        <button onclick="loadAiDetails('${ai.id}')" class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#aiDetailModal">Details</button> 
                     </div> 
                 </div>
             </div>
@@ -64,7 +64,13 @@ const sortAiHubByDate = () => {
   const sortByDateButton = document.querySelector('.btn-danger');
   sortByDateButton.addEventListener('click', sortAiHubByDate);
 //   sort by date finished
-  
+  const loadAiDetails = async id =>{
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data.data);
+
+  }
 
 
 loadAiHub();
