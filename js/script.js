@@ -47,5 +47,24 @@ const toggleSpinner = isLoading => {
         loadersection.classList.add('d-none');
     }
 }
+// sort by date start
+const sortAiHubByDate = () => {
+    const aiHub = document.querySelectorAll('.col');
+    const sortedAiHub = Array.from(aiHub).sort((a, b) => {
+      const aDate = new Date(a.querySelector('p').textContent);
+      const bDate = new Date(b.querySelector('p').textContent);
+      return aDate - bDate;
+    });
+    const aiContainer = document.getElementById('ai-container');
+    aiContainer.innerHTML = '';
+    sortedAiHub.forEach(ai => {
+      aiContainer.appendChild(ai);
+    });
+  };
+  const sortByDateButton = document.querySelector('.btn-danger');
+  sortByDateButton.addEventListener('click', sortAiHubByDate);
+//   sort by date finished
+  
+
 
 loadAiHub();
