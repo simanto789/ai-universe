@@ -72,7 +72,7 @@ const sortAiHubByDate = () => {
  }
 
   const displayAiDetail = ai =>{
-    console.log(ai);
+    // console.log(ai);
     const modalTittle = document.getElementById('aiDetailModalLabel');
     modalTittle.innerText = ai.tool_name;
     const aiDetails = document.getElementById('ai-details');
@@ -96,7 +96,9 @@ const sortAiHubByDate = () => {
                   </div> 
                   <div>
                   <h5>Integration</h5>
-                  <p></p>
+                   <ul mb-2> 
+                       ${ai.integrations.map(integration => `<li>${integration}</li>`).join('')}
+                     </ul>
                   </div> 
               </div>
 
@@ -106,10 +108,9 @@ const sortAiHubByDate = () => {
         </div>
         <div class="col">
           <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <img src="${ai.image_link['0']}" class="card-img-top p-4 " alt="...">
+              <h5 class="text-center">${ai.input_output_examples['0'].input}</h5>
+              <p class="text-center p-3">${ai.input_output_examples['0'].output}</p>
             </div>
           </div>
         </div>
