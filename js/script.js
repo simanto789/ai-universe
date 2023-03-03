@@ -11,6 +11,7 @@ const loadAiHub = async () => {
 }
 const displayAiHub = aiHub => {
     const aiContainer = document.getElementById('ai-container');
+    
     aiContainer.innerHTML = '';
     aiHub.forEach(ai => {
         const aiDiv = document.createElement('div');
@@ -33,5 +34,18 @@ const displayAiHub = aiHub => {
         `;
         aiContainer.appendChild(aiDiv);
     });
+    // stop loader
+    toggleSpinner(false);
 }
+const toggleSpinner = isLoading => {
+    const loadersection = document.getElementById('loader');
+    if(isLoading){
+        displayAiHub(data.data.tools)
+        loadersection.classList.remove('d-none');
+    }
+    else{
+        loadersection.classList.add('d-none');
+    }
+}
+
 loadAiHub();
