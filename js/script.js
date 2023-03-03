@@ -2,11 +2,16 @@ const loadAiHub = async () => {
     const url = `https://openapi.programming-hero.com/api/ai/tools`
     const res = await fetch(url);
     const data = await res.json();
-    displayAiHub(data.data.tools);
+    displayAiHub(data.data.tools.slice(0, 6));
+    const showAllButton = document.getElementById('btn-show-all');
+    showAllButton.addEventListener('click', () => {
+        displayAiHub(data.data.tools);
+        showAllButton.style.display = 'none';
+    });
 }
-
 const displayAiHub = aiHub => {
-    const aiContainer = document.getElementById('ai-container')
+    const aiContainer = document.getElementById('ai-container');
+    aiContainer.innerHTML = '';
     aiHub.forEach(ai => {
         const aiDiv = document.createElement('div');
         aiDiv.classList.add('col');
@@ -25,9 +30,8 @@ const displayAiHub = aiHub => {
                     </div> 
                 </div>
             </div>
-    `;
+        `;
         aiContainer.appendChild(aiDiv);
-    })
+    });
 }
-
 loadAiHub();

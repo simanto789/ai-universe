@@ -17,11 +17,25 @@
     <!-- header section end -->
 
     <main>
-        <section class="container">
-            <div id="ai-container" class="row row-cols-1 row-cols-md-3 g-4">
-                
+        <!-- add spinner when data is loading -->
+        <section>
+            <div style="margin-bottom: 20px;" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             </div>
         </section>
+        <!-- card section start -->
+        <section class="container">
+            <div id="ai-container" class="row row-cols-1 row-cols-md-3 g-4">
+
+            </div>
+        </section>
+        <!-- show all button -->
+        <div id="show-all" class="text-center">
+            <div id="btn-show-all" class="btn btn-primary">show all</div>
+        </div>
+        
     </main>
 
 
