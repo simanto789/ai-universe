@@ -68,8 +68,53 @@ const sortAiHubByDate = () => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.data);
+    displayAiDetail(data.data);
+ }
 
+  const displayAiDetail = ai =>{
+    console.log(ai);
+    const modalTittle = document.getElementById('aiDetailModalLabel');
+    modalTittle.innerText = ai.tool_name;
+    const aiDetails = document.getElementById('ai-details');
+    aiDetails.innerHTML =  `
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${ai.description}</h5>
+              <div class="d-flex gap-3 justify-content-evenly">
+                <div class="border p-3 bg-success text-white">${ ai.pricing[0].price +  ai.pricing[0].plan }</div>
+                <div class="border p-3 bg-success text-white">${ ai.pricing[1].price +  ai.pricing[1].plan }</div>
+                <div class="border p-3 bg-success text-white">${ ai.pricing[2].price +  ai.pricing[2].plan }</div>
+              </div>
+              <div class = "d-flex gap-3 justify-content-between ">
+                  <div>
+                  <h5>Features</h5>
+                  <li>${ai.features['1'] ? ai.features['1'].feature_name: "no data found" }</li> 
+                  <li>${ai.features['2'] ? ai.features['2'].feature_name: "no data found"}</li> 
+                  <li>${ai.features['3'] ? ai.features['3'].feature_name: "no data found"}</li> 
+                  </div> 
+                  <div>
+                  <h5>Integration</h5>
+                  <p></p>
+                  </div> 
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
   }
 
 
