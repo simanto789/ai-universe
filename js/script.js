@@ -11,7 +11,6 @@ const loadAiHub = async () => {
 }
 const displayAiHub = aiHub => {
   const aiContainer = document.getElementById('ai-container');
-
   aiContainer.innerHTML = '';
   aiHub.forEach(ai => {
     const aiDiv = document.createElement('div');
@@ -70,53 +69,50 @@ const loadAiDetails = async id => {
   const data = await res.json();
   displayAiDetail(data.data);
 }
-
 const displayAiDetail = ai => {
-  // console.log(ai);
   const modalTittle = document.getElementById('aiDetailModalLabel');
   modalTittle.innerText = ai.tool_name;
   const aiDetails = document.getElementById('ai-details');
   aiDetails.innerHTML = `
     <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col">
-          <div id="myDiv" class="card">
-            <div class="card-body">
-              <h4 class="card-title mb-4">${ai.description}</h4>
-              <div class="d-flex gap-2 justify-content-evenly row row-cols-1">
-                <div class="border p-2 bg-white text-dark text-center fw-semibold">${ai.pricing[0].price + ai.pricing[0].plan}</div>
-                <div class="border p-2 bg-white text-dark text-center fw-semibold">${ai.pricing[1].price + ai.pricing[1].plan}</div>
-                <div class="border p-2 bg-white text-dark text-center fw-semibold">${ai.pricing[2].price + ai.pricing[2].plan}</div>
-              </div>
-              <div class = "d-flex gap-3 justify-content-between mt-4 ">
-                  <div>
-                  <h5>Features</h5>
-                  <li>${ai.features['1'] ? ai.features['1'].feature_name : "no data found"}</li> 
-                  <li>${ai.features['2'] ? ai.features['2'].feature_name : "no data found"}</li> 
-                  <li>${ai.features['3'] ? ai.features['3'].feature_name : "no data found"}</li> 
-                  </div> 
-                  <div>
-                  <h5>Integration</h5>
-                   <ul mb-2> 
-                       ${ai.integrations.map(integration => `<li>${integration}</li>`).join('')}
-                     </ul>
-                  </div> 
-              </div>
-
-
+      <div class="col">
+        <div id="myDiv" class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">${ai.description}</h4>
+            <div class="d-flex gap-2 justify-content-evenly row row-cols-1">
+            <div class="border p-2 bg-white text-dark text-center fw-semibold">${ai?.pricing?.[0]?.price + ai?.pricing?.[0]?.plan ? ai.pricing[0].price + ai.pricing[0].plan : "Free of cost"}</div>
+            <div class="border p-2 bg-white text-dark text-center fw-semibold">${ai?.pricing?.[1]?.price + ai?.pricing?.[1]?.plan ? ai.pricing[1].price + ai.pricing[1].plan : "Free of cost"}</div>
+            <div class="border p-2 bg-white text-dark text-center fw-semibold">${ai?.pricing?.[2]?.price + ai?.pricing?.[2]?.plan ? ai.pricing[2].price + ai.pricing[2].plan : "Free of cost"}</div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="${ai.image_link['0']}" class="card-img-top p-4 " alt="...">
-            <div id="accuracy" class=" position-absolute top-0 end-0 p-4 "><span class="badge text-bg-danger">${ai.accuracy.score * 100}% accuracy</span></div>
-              <h5 class="text-center">${ai.input_output_examples['0'].input}</h5>
-              <p class="text-center p-3">${ai.input_output_examples['0'].output ? ai.input_output_examples['0'].output : "no output found"}</p>
+            <div class="d-flex gap-3 justify-content-around mt-4">
+              <div>
+                <h5>Features</h5>
+                <ul>
+                  <li>${ai?.features['1'] ? ai.features['1'].feature_name : "no data found"}</li> 
+                  <li>${ai?.features['2'] ? ai.features['2'].feature_name : "no data found"}</li> 
+                  <li>${ai?.features['3'] ? ai.features['3'].feature_name : "no data found"}</li> 
+                </ul>
+              </div> 
+              <div>
+                <h5>Integration</h5>
+                <ul>
+                ${ai?.integrations?.length ? ai.integrations.map(integration => `<li>${integration}</li>`).join('') : 'no data found'}
+                </ul>
+              </div> 
             </div>
           </div>
         </div>
       </div>
-    `
+      <div class="col">
+        <div class="card">
+          <img src="${ai.image_link['0']}" class="card-img-top p-4" alt="...">
+          <div id="accuracy" class="position-absolute top-0 end-0 p-4"><span class="badge text-bg-danger">${ai.accuracy.score * 100}% accuracy</span></div>
+          <h5 class="text-center">${ai.input_output_examples?.['0']?.input ? ai.input_output_examples['0']?.input : "Can you give any example" }</h5>
+          <p class="text-center p-3">${ai.input_output_examples?.['0']?.output ? ai.input_output_examples['0']?.output : "No! Not yet.Take a break"}</p>
+        </div>
+      </div>
+    </div>
+  `;
   const accuracyDiv = document.getElementById('accuracy');
   if (accuracyDiv && accuracyDiv.innerText.includes('%')) {
     const accuracyScore = parseFloat(accuracyDiv.innerText.replace('% accuracy', ''));
@@ -126,8 +122,5 @@ const displayAiDetail = ai => {
   }
   const myDiv = document.getElementById('myDiv');
   myDiv.style.cssText = 'background-color: #FFCCBC ';
-
 }
-
-
 loadAiHub();
