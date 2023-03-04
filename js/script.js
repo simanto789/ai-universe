@@ -26,8 +26,8 @@ const displayAiHub = aiHub => {
                      </ol>
                      <h5 class="card-tittle border-top mt-2">${ai.name}</h5>
                     <div class="d-flex justify-content-between mt-3"> 
-                        <p>${ai.published_in}</p>
-                        <button onclick="loadAiDetails('${ai.id}')" class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#aiDetailModal">Details</button> 
+                        <p><i class="fa-regular fa-calendar-days me-2"></i>${ai.published_in}</p>
+                        <button onclick="loadAiDetails('${ai.id}')" class="btn btn-light" href="#" data-bs-toggle="modal" data-bs-target="#aiDetailModal"><i class="fa-solid fa-arrow-right"></i></button> 
                     </div> 
                 </div>
             </div>
